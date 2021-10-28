@@ -3,6 +3,9 @@
 body {
     font-family: 'Josefin Sans', sans-serif;
 }
+h1 {
+    color: #02FF84;
+}
 .card {
     position: relative;
 }
@@ -17,4 +20,25 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
     transform: rotate(-15deg);
+}
+
+.btn-success {
+    background-color: #02FF84;
+    color: black;
+    border: none;
+}
+
+#searchBtn {
+    border-color: #02FF84;
+    color: #02FF84;
+    background-color: black;
+}
+
+.cart-container {
+    border: 1px solid #02FF84;
+}
+
+li span {
+    padding: 0 5px!important;
+    margin-left: 5px;
 }

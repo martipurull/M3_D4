@@ -21,7 +21,7 @@
         <nav class="navbar navbar-light bg-light mt-5">
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </nav>
         <div class="container">
@@ -34,9 +34,11 @@
                 <div class="col-3">
                     <ul class="list-group mt-5">
                         <h5>Your basket <i class="bi bi-cart3"></i></h5>
-                        <div class="text-dark">
-                            <li class="list-group-item">Your basket is empty! <i class="bi bi-emoji-frown"></i>
+                        <div class="text-dark rounded cart-container">
+                            <li class="list-group-item">Your basket is empty! <i class="bi bi-emoji-frown"></i></li>
                         </div>
+                        <button type="button" id="deleteAllBtn" class="btn btn-sm btn-danger d-none">empty
+                            cart</button>
                     </ul>
                 </div>
             </div>
