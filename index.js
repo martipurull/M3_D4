@@ -16,7 +16,9 @@ window.onload = () => {
                 bookCard.classList.add('h-100')
                 bookCard.classList.add('text-dark')
                 bookCard.innerHTML = `
+                    <a href="https://striveschool-api.herokuapp.com/books/${ book.asin }">
                     <img src="${ book.img }" class="card-img-top" alt="...">
+                    </a>
                     <div class="card-body">
                     <h6 class="card-text">${ book.title }</h6>
                     <p class="card-text">£${ book.price }</p>
@@ -98,7 +100,7 @@ window.onload = () => {
                 bookCard.classList.add('h-100')
                 bookCard.classList.add('text-dark')
                 bookCard.innerHTML = `
-                    <img src="${ book.img }" class="card-img-top" alt="...">
+                    <a href="https://striveschool-api.herokuapp.com/books/${ book.asin }"><img src="${ book.img }" class="card-img-top" alt="..."></a>
                     <div class="card-body">
                     <h6 class="card-text">${ book.title }</h6>
                     <p class="card-text">£${ book.price }</p>
