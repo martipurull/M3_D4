@@ -1,15 +1,20 @@
 window.onload = () => {
 
+    let loadedBooks = []
+    let filteredBooks = []
+
     const loadBooks = () => fetch('https://striveschool-api.herokuapp.com/books')
         .then((response) => response.json())
         .then(receivedData => {
             receivedData.forEach(book => {
+                loadedBooks.push(book)
                 const bookCardRow = document.querySelector('.col-9 .row')
                 const bookCardCol = document.createElement('div')
                 bookCardCol.classList.add('col-6')
                 bookCardCol.classList.add('col-md-4')
                 bookCardCol.classList.add('col-lg-3')
                 bookCardCol.classList.add('my-3')
+                bookCardCol.classList.add('book-card-col')
                 bookCardRow.appendChild(bookCardCol)
                 const bookCard = document.createElement('div')
                 bookCard.classList.add('card')
@@ -44,8 +49,8 @@ window.onload = () => {
                 bookCard.appendChild(skipBtn)
             })
         })
-
     loadBooks()
+    console.log(loadedBooks)
 
     const addToCart = (event) => {
         const selectedCardTitle = event.target.parentNode.children[1].children[0]
@@ -79,60 +84,61 @@ window.onload = () => {
 
 
 
-    const filterBooks = () => fetch('https://striveschool-api.herokuapp.com/books')
-        .then((response) => response.json())
-        .then(receivedData => {
-            const searchInputValue = document.querySelector('form input').value
-            console.log(searchInputValue)
-            return receivedData.filter(book => book.title.includes(searchInputValue))
-        })
-        .then(filteredData => {
-            filteredData.forEach(book => {
-                const bookCardRow = document.querySelector('.col-9 .row')
-                const bookCardCol = document.createElement('div')
-                bookCardCol.classList.add('col-6')
-                bookCardCol.classList.add('col-md-4')
-                bookCardCol.classList.add('col-lg-3')
-                bookCardCol.classList.add('my-3')
-                bookCardRow.appendChild(bookCardCol)
-                const bookCard = document.createElement('div')
-                bookCard.classList.add('card')
-                bookCard.classList.add('h-100')
-                bookCard.classList.add('text-dark')
-                bookCard.innerHTML = `
-                    <a href="https://striveschool-api.herokuapp.com/books/${ book.asin }"><img src="${ book.img }" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                    <h6 class="card-text">${ book.title }</h6>
-                    <p class="card-text">£${ book.price }</p>
-                    <small class="card-text">${ book.category }</small>
-                    </div>
-                `
-                bookCardCol.appendChild(bookCard)
-                const addToCartBtn = document.createElement('button')
-                addToCartBtn.classList.add('btn')
-                addToCartBtn.classList.add('btn-success')
-                addToCartBtn.innerText = 'add to cart'
-                addToCartBtn.addEventListener('click', addToCart)
-                bookCard.appendChild(addToCartBtn)
-                const skipBtn = document.createElement('button')
-                skipBtn.classList.add('btn')
-                skipBtn.classList.add('btn-secondary')
-                skipBtn.classList.add('btn-sm')
-                skipBtn.classList.add('my-1')
-                skipBtn.innerText = 'hide book'
-                skipBtn.addEventListener('click', function () {
-                    bookCard.classList.add('d-none')
-                })
-                bookCard.appendChild(skipBtn)
-            })
-        })
+    // const filterBooks = () => fetch('https://striveschool-api.herokuapp.com/books')
+    //     .then((response) => response.json())
+    //     .then(receivedData => {
+    //         const searchInputValue = document.querySelector('form input').value
+    //         console.log(searchInputValue)
+    //         return receivedData.filter(book => book.title.includes(searchInputValue))
+    //     })
+    //     .then(filteredData => {
+    //         filteredData.forEach(book => {
+    //             const bookCardRow = document.querySelector('.col-9 .row')
+    //             const bookCardCol = document.createElement('div')
+    //             bookCardCol.classList.add('col-6')
+    //             bookCardCol.classList.add('col-md-4')
+    //             bookCardCol.classList.add('col-lg-3')
+    //             bookCardCol.classList.add('my-3')
+    //             bookCardCol.classList.add('book-card-col')
+    //             bookCardRow.appendChild(bookCardCol)
+    //             const bookCard = document.createElement('div')
+    //             bookCard.classList.add('card')
+    //             bookCard.classList.add('h-100')
+    //             bookCard.classList.add('text-dark')
+    //             bookCard.innerHTML = `
+    //                 <a href="https://striveschool-api.herokuapp.com/books/${ book.asin }"><img src="${ book.img }" class="card-img-top" alt="..."></a>
+    //                 <div class="card-body">
+    //                 <h6 class="card-text">${ book.title }</h6>
+    //                 <p class="card-text">£${ book.price }</p>
+    //                 <small class="card-text">${ book.category }</small>
+    //                 </div>
+    //             `
+    //             bookCardCol.appendChild(bookCard)
+    //             const addToCartBtn = document.createElement('button')
+    //             addToCartBtn.classList.add('btn')
+    //             addToCartBtn.classList.add('btn-success')
+    //             addToCartBtn.innerText = 'add to cart'
+    //             addToCartBtn.addEventListener('click', addToCart)
+    //             bookCard.appendChild(addToCartBtn)
+    //             const skipBtn = document.createElement('button')
+    //             skipBtn.classList.add('btn')
+    //             skipBtn.classList.add('btn-secondary')
+    //             skipBtn.classList.add('btn-sm')
+    //             skipBtn.classList.add('my-1')
+    //             skipBtn.innerText = 'hide book'
+    //             skipBtn.addEventListener('click', function () {
+    //                 bookCard.classList.add('d-none')
+    //             })
+    //             bookCard.appendChild(skipBtn)
+    //         })
+    //     })
 
 
-    const makeSearchBtn = () => {
-        const searchBtn = document.getElementById('searchBtn')
-        searchBtn.addEventListener('click', filterBooks)
-    }
-    makeSearchBtn()
+    // const makeSearchBtn = () => {
+    //     const searchBtn = document.getElementById('searchBtn')
+    //     searchBtn.addEventListener('click', filterBooks)
+    // }
+    // makeSearchBtn()
 
     const emptyCart = () => {
         const cartList = document.querySelector('.list-group .text-dark')
@@ -144,4 +150,23 @@ window.onload = () => {
         addedToCartBadges.forEach(badge => badge.remove())
     }
 
+
+
+
+
+    const filterBooks = (query) => {
+        console.log(loadedBooks)
+    }
+
+    // const addOnInputHandler = () => {
+    //     const inputField = document.querySelector('form>input')
+    //     let inputValue = inputField.value
+    //     inputField.addEventListener('input', filterBooks(inputValue))
+    // }
+    // addOnInputHandler()
+
+
+
 }
+
+
